@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.UUID;
 
 
@@ -27,8 +26,5 @@ public class User {
 
     @Column(nullable = false)
     private String role;
-
-    @Column
-    private Date createdAt;
 
 }
