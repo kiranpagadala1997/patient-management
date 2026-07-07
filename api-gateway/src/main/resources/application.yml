@@ -7,18 +7,25 @@ management:
       exposure:
         include: gateway
 
+
 spring:
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
+        routes:
+            - id: auth-service-route
+              uri: http://auth-service:4005
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
+
             - id: patient-service-route
               uri: http://patient-service:4000
               predicates:
                 - Path=/api/patients/**
               filters:
                 - StripPrefix=1
+                - JwtValidation
 
             - id: api-docs-patient-route
               uri: http://patient-service:4000
@@ -37,3 +44,6 @@ spring:
 logging:
   level:
     org.springframework.cloud.gateway: TRACE
+
+jwt:
+  secret: fNlv26HLQjn6rRf3kNkc07pMmva78fx5JgYEare/9GU=
